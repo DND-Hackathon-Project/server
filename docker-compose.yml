@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  database:
+    image: mysql
+    container_name: coderumi_db
+    environment:
+      MYSQL_DATABASE: coderumi
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+

@@ -47,9 +47,22 @@ public class PosterService {
     }
 
     private static String saveFile(MultipartFile file) throws IOException {
-        String filePath = UPLOAD_DIR + UUID.randomUUID();
+        String extension = getExtension(file);
+
+        String filePath = UPLOAD_DIR + UUID.randomUUID() + extension;
+
         file.transferTo(new File(filePath));
         return filePath;
+    }
+
+    private static String getExtension(MultipartFile file) {
+        String extension = "";
+        String originalFilename = file.getOriginalFilename();
+
+        if (originalFilename != null && originalFilename.contains(".")) {
+            extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+        }
+        return extension;
     }
 
     public List<PosterDto> getPosters(Long festivalId) {

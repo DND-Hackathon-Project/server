@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @ToString
 @Entity
@@ -35,4 +37,7 @@ public class Festival {
         this.address = address;
         this.vote_deadline = vote_deadline;
     }
+
+    @OneToMany(mappedBy = "festival", fetch = FetchType.LAZY)
+    private List<Poster> posters = new ArrayList<>();
 }

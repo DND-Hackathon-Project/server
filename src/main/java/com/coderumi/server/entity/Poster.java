@@ -5,6 +5,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -30,4 +33,6 @@ public class Poster {
         this.member = member;
         this.image_url = image_url;
     }
+    @OneToMany(mappedBy = "poster", fetch = FetchType.LAZY)
+    private List<Vote> votes = new ArrayList<>();
 }

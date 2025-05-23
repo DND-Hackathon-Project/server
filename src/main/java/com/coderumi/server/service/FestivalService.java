@@ -1,7 +1,10 @@
 package com.coderumi.server.service;
 
+import com.coderumi.server.dto.FestivalDto;
 import com.coderumi.server.entity.Festival;
+import com.coderumi.server.entity.Poster;
 import com.coderumi.server.repository.FestivalRepository;
+import com.coderumi.server.repository.PosterRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,7 @@ import java.util.List;
 public class FestivalService {
 
     private final FestivalRepository festivalRepository;
+    private final PosterRepository posterRepository;
     private static final String filePath = "data/data.json";
 
     @Transactional
@@ -49,5 +53,11 @@ public class FestivalService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public FestivalDto getFestival(Long festivalId) {
+        Festival festival = festivalRepository.findById(festivalId).orElseThrow();
+        List<Poster> posters = posterRepository.findByFestivalId(festivalId);
+
     }
 }

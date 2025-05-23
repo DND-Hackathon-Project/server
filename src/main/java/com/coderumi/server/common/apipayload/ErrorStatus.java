@@ -20,7 +20,14 @@ public enum ErrorStatus implements ResponseStatus {
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER4040", "member.not-found"),
 
     // festival
-    FESTIVAL_NOT_FOUND(HttpStatus.NOT_FOUND, "FESTIVAL4040", "festival.not-found"),;
+    FESTIVAL_NOT_FOUND(HttpStatus.NOT_FOUND, "FESTIVAL4040", "festival.not-found"),
+
+    // poster
+    POSTER_NOT_FOUND(HttpStatus.NOT_FOUND, "POSTER4040", "poster.not-found"),
+
+    // vote
+    VOTE_CONFLICT(HttpStatus.CONFLICT, "VOTE4090", "vote.conflict"),
+    ;
 
     private final HttpStatus httpStatus;
     @Getter

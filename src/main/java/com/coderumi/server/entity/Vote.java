@@ -22,4 +22,8 @@ public class Vote {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    public Vote(Poster poster, Member member) {
+        this.poster = poster;
+        this.member = member;
+    }
 }

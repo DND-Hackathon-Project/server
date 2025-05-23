@@ -8,7 +8,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/coderumi?useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: wkwjsrj895
+    password: 1234
 
   jpa:
     hibernate:

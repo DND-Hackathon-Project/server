@@ -17,7 +17,7 @@ public enum ErrorStatus implements ResponseStatus {
     _INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "COMMON500", "common.internal-server-error"),
 
     // member
-    MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER4000", "member.not-found"),
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER4040", "member.not-found"),
 
     // festival
     FESTIVAL_NOT_FOUND(HttpStatus.NOT_FOUND, "FESTIVAL4040", "festival.not-found"),;

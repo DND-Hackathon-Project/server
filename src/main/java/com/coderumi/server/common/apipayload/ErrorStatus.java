@@ -16,6 +16,8 @@ public enum ErrorStatus implements ResponseStatus {
     _FORBIDDEN(HttpStatus.FORBIDDEN, "COMMON403", "common.forbidden"),
     _INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "COMMON500", "common.internal-server-error"),
 
+    // member
+    MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER4000", "member.not-found"),
     ;
 
     private final HttpStatus httpStatus;

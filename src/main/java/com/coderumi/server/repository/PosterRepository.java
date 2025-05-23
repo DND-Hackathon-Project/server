@@ -13,6 +13,7 @@ public interface PosterRepository extends JpaRepository<Poster, Long>, PosterCus
 
     @Query("""
         SELECT new com.coderumi.server.dto.PosterDto(
+            p.festival.id,
             p.id,
             p.image_url,
             COUNT(v),

@@ -29,6 +29,7 @@ public class PosterCustomRepositoryImpl implements PosterCustomRepository {
     public List<PosterDto> searchPosters(String region, boolean isSelected) {
 
         return queryFactory.select(Projections.constructor(PosterDto.class,
+                        poster.festival.id,
                         poster.id,
                         poster.image_url,
                         vote.count().longValue(),

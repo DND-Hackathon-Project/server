@@ -1,6 +1,6 @@
 package com.coderumi.server.controller;
 
-import com.coderumi.server.service.PostService;
+import com.coderumi.server.service.PosterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,13 +12,13 @@ import java.io.IOException;
 
 @RequiredArgsConstructor
 @RestController
-public class PostController {
-    private final PostService postService;
+public class PosterController {
+    private final PosterService posterService;
 
     @PostMapping("/festivals/{festivalId}/posts")
     public void uploadFile(@PathVariable Long festivalId,
                            @RequestParam MultipartFile file,
                            @RequestParam Long memberId) throws IOException {
-        postService.uploadFile(festivalId, memberId, file);
+        posterService.uploadFile(festivalId, memberId, file);
     }
 }

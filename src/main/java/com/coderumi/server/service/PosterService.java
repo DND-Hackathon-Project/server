@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
-public class PostService {
+public class PosterService {
     private final FestivalRepository festivalRepository;
     private final MemberRepository memberRepository;
     private final PosterRepository posterRepository;

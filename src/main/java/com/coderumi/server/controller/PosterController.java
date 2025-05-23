@@ -1,14 +1,13 @@
 package com.coderumi.server.controller;
 
+import com.coderumi.server.dto.PosterDto;
 import com.coderumi.server.service.PosterService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -20,5 +19,10 @@ public class PosterController {
                            @RequestParam MultipartFile file,
                            @RequestParam Long memberId) throws IOException {
         posterService.uploadFile(festivalId, memberId, file);
+    }
+
+    @GetMapping("/festivals/{festivalId}/posters")
+    public List<PosterDto> getPosters(@PathVariable(name = "festivalId") Long id) {
+        return posterService.getPosters(id);
     }
 }

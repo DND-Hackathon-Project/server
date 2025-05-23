@@ -2,6 +2,7 @@ package com.coderumi.server.service;
 
 import com.coderumi.server.common.apipayload.ErrorStatus;
 import com.coderumi.server.common.exception.GeneralException;
+import com.coderumi.server.dto.PosterDto;
 import com.coderumi.server.entity.Festival;
 import com.coderumi.server.entity.Member;
 import com.coderumi.server.entity.Poster;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -48,5 +50,9 @@ public class PosterService {
         String filePath = UPLOAD_DIR + UUID.randomUUID();
         file.transferTo(new File(filePath));
         return filePath;
+    }
+
+    public List<PosterDto> getPosters(Long festivalId) {
+        return posterRepository.findByFestivalId(festivalId);
     }
 }

@@ -1,6 +1,6 @@
 package com.coderumi.server.repository;
 
-import com.coderumi.server.entity.Festival;
+import com.coderumi.server.dto.PosterDto;
 import com.coderumi.server.entity.Poster;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,9 +12,9 @@ import java.util.List;
 public interface PosterRepository extends JpaRepository<Poster, Long> {
 
     @Query("""
-        SELECT new com.coderumi.server.dto;
+        SELECT new com.coderumi.server.dto.PosterDto(
             p.id,
-            p.imageUrl,
+            p.image_url,
             COUNT(v)
         )
         FROM Poster p
@@ -22,5 +22,5 @@ public interface PosterRepository extends JpaRepository<Poster, Long> {
         WHERE p.festival.id = :festivalId
         GROUP BY p.id
     """)
-    List<Poster> findByFestivalId(Long festivalId);
+    List<PosterDto> findByFestivalId(Long festivalId);
 }

@@ -18,7 +18,9 @@ public enum ErrorStatus implements ResponseStatus {
 
     // member
     MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER4000", "member.not-found"),
-    ;
+
+    // festival
+    FESTIVAL_NOT_FOUND(HttpStatus.NOT_FOUND, "FESTIVAL4040", "festival.not-found"),;
 
     private final HttpStatus httpStatus;
     @Getter

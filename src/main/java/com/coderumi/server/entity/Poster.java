@@ -24,4 +24,10 @@ public class Poster {
     @JoinColumn(name = "member_id")
     private Member member;
 
+
+    public Poster(Festival festival, Member member, String image_url) {
+        this.festival = festival;
+        this.member = member;
+        this.image_url = image_url;
+    }
 }

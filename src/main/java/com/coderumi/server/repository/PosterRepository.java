@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PosterRepository extends JpaRepository<Poster, Long> {
+public interface PosterRepository extends JpaRepository<Poster, Long>, PosterCustomRepository {
 
     @Query("""
         SELECT new com.coderumi.server.dto.PosterDto(

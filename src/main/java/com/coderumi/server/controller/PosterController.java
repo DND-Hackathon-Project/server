@@ -25,4 +25,10 @@ public class PosterController {
     public List<PosterDto> getPosters(@PathVariable(name = "festivalId") Long id) {
         return posterService.getPosters(id);
     }
+
+    @GetMapping("/posters")
+    public List<PosterDto> searchPosters(@RequestParam(name = "region", required = false) String region,
+                                         @RequestParam(name = "isSelected", required = false) boolean isSelected) {
+        return posterService.searchPosters(region, isSelected);
+    }
 }

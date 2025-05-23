@@ -33,6 +33,10 @@ public class Poster {
         this.member = member;
         this.image_url = image_url;
     }
+
     @OneToMany(mappedBy = "poster", fetch = FetchType.LAZY)
     private List<Vote> votes = new ArrayList<>();
+
+    @OneToOne(mappedBy = "poster", fetch = FetchType.LAZY)
+    private Election election;
 }

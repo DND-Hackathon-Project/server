@@ -55,4 +55,8 @@ public class PosterService {
     public List<PosterDto> getPosters(Long festivalId) {
         return posterRepository.findByFestivalId(festivalId);
     }
+
+    public List<PosterDto> searchPosters(String region, boolean isSelected) {
+        return posterRepository.searchPosters(region, isSelected);
+    }
 }

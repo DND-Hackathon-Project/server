@@ -5,7 +5,9 @@ import com.coderumi.server.entity.Poster;
 import com.coderumi.server.entity.QVote;
 import com.coderumi.server.repository.PosterCustomRepository;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +22,21 @@ public class PosterCustomRepositoryImpl implements PosterCustomRepository {
 
     private final JPAQueryFactory queryFactory;
 
+    @Override
+    public List<PosterDto> searchPosters(String region, boolean isSelected) {
+
+        return queryFactory.select(Projections.constructor(PosterDto.class,
+                        poster.id,
+                        poster.image_url,
+                        vote.count().longValue()
+                ))
+                .from(poster)
+                .leftJoin(poster.votes, vote)
+                .where(region != null ? poster.festival.region.eq(region) : null)
+                .where(isSelected ? poster.election.isNotNull() : null)
+                .groupBy(poster.id)
+                .fetch();
+    }
 
 
 

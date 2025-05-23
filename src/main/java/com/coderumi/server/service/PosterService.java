@@ -38,9 +38,12 @@ public class PosterService {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_NOT_FOUND));
 
-        String filePath = saveFile(file);
+        String extension = getExtension(file);
+        String fileName = UUID.randomUUID() + extension;
 
-        savePoster(festival, member, filePath);
+        saveFile(file, fileName);
+
+        savePoster(festival, member, fileName);
     }
 
     private void savePoster(Festival festival, Member member, String filePath) {
@@ -48,13 +51,9 @@ public class PosterService {
         posterRepository.save(poster);
     }
 
-    private static String saveFile(MultipartFile file) throws IOException {
-        String extension = getExtension(file);
-
-        String filePath = UPLOAD_DIR + UUID.randomUUID() + extension;
-
+    private static void saveFile(MultipartFile file, String fileName) throws IOException {
+        String filePath = UPLOAD_DIR + fileName;
         file.transferTo(new File(filePath));
-        return filePath;
     }
 
     private static String getExtension(MultipartFile file) {

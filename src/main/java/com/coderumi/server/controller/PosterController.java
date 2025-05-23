@@ -1,6 +1,7 @@
 package com.coderumi.server.controller;
 
 import com.coderumi.server.dto.PosterDto;
+import com.coderumi.server.dto.res.HottestPosterRes;
 import com.coderumi.server.service.PosterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +31,10 @@ public class PosterController {
     public List<PosterDto> searchPosters(@RequestParam(name = "region", required = false) String region,
                                          @RequestParam(name = "isSelected", required = false) boolean isSelected) {
         return posterService.searchPosters(region, isSelected);
+    }
+
+    @GetMapping("/posters/hot")
+    public HottestPosterRes getHotPosters(@RequestParam(required = false) String region) {
+        return posterService.getHotPosters(region);
     }
 }

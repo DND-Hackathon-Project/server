@@ -2,17 +2,19 @@ package com.coderumi.server.repository.impl;
 
 import com.coderumi.server.dto.PosterDto;
 import com.coderumi.server.entity.Poster;
-import com.coderumi.server.entity.QVote;
 import com.coderumi.server.repository.PosterCustomRepository;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
+import static com.coderumi.server.entity.QElection.election;
+import static com.coderumi.server.entity.QFestival.festival;
 import static com.coderumi.server.entity.QMember.member;
 import static com.coderumi.server.entity.QPoster.poster;
 import static com.coderumi.server.entity.QVote.vote;
@@ -42,6 +44,21 @@ public class PosterCustomRepositoryImpl implements PosterCustomRepository {
                 .fetch();
     }
 
+    @Override
+    public Optional<Poster> findHottestPosterByRegion(String region) {
+        List<Tuple> posterVotes = queryFactory
+                .select(poster, vote.count())
+                .from(vote)
+                .join(vote.poster, poster)
+                .join(poster.festival, festival)
+                .join(election).on(election.poster.eq(poster)) // 당선된 포스터만
+                .where(region != null ? festival.region.eq(region) : null) // region 조건 동적 처리
+                .groupBy(poster)
+                .fetch();
 
+        return posterVotes.stream()
+                .max(Comparator.comparingLong(t -> t.get(vote.count())))
+                .map(t -> t.get(poster));
+    }
 
 }

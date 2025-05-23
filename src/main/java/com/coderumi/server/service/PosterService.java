@@ -3,6 +3,7 @@ package com.coderumi.server.service;
 import com.coderumi.server.common.apipayload.ErrorStatus;
 import com.coderumi.server.common.exception.GeneralException;
 import com.coderumi.server.dto.PosterDto;
+import com.coderumi.server.dto.res.HottestPosterRes;
 import com.coderumi.server.entity.Festival;
 import com.coderumi.server.entity.Member;
 import com.coderumi.server.entity.Poster;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -71,5 +73,16 @@ public class PosterService {
 
     public List<PosterDto> searchPosters(String region, boolean isSelected) {
         return posterRepository.searchPosters(region, isSelected);
+    }
+
+    @Transactional(readOnly = true)
+    public HottestPosterRes getHotPosters(String region) {
+        Optional<Poster> hottestPoster = posterRepository.findHottestPosterByRegion(region);
+        if (hottestPoster.isPresent()) {
+            Poster poster = hottestPoster.get();
+            return HottestPosterRes.of(poster.getFestival().getId(), poster.getImage_url());
+        } else {
+            return null;
+        }
     }
 }

@@ -12,4 +12,5 @@ public interface PosterCustomRepository {
 
     List<PosterDto> searchPosters(String region, boolean isSelected);
 
+    Optional<Poster> findHottestPosterByRegion(String region);
 }

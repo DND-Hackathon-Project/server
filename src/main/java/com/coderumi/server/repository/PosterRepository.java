@@ -15,10 +15,13 @@ public interface PosterRepository extends JpaRepository<Poster, Long>, PosterCus
         SELECT new com.coderumi.server.dto.PosterDto(
             p.id,
             p.image_url,
-            COUNT(v)
+            COUNT(v),
+            m.id,
+            m.nickname
         )
         FROM Poster p
         LEFT JOIN p.votes v
+        LEFT JOIN p.member m
         WHERE p.festival.id = :festivalId
         GROUP BY p.id
     """)
